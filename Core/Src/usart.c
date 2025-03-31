@@ -22,6 +22,7 @@
 
 /* USER CODE BEGIN 0 */
 #include "BLE.h"
+#include "HealthMonitor.h"
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;
@@ -203,7 +204,11 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
     //huart1:蓝牙通讯
     if (huart == &huart1){ 
-        BLE_RxEventCallback(huart, Size);
+        // BLE_RxEventCallback(huart, Size);
+    }
+
+    if (huart == &huart2){
+        HealthMonitor_recv_callback(huart, Size);
     }
 }
 /* USER CODE END 1 */

@@ -32,6 +32,7 @@
 #include "stm32f1xx_hal.h"
 #include "LoopProgram.h"
 #include "MPU6050.h"
+#include "HealthMonitor.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -115,6 +116,7 @@ int main(void)
     LoopProgram_Start();
     LoopProgram_WatchDog_Set(TRUE);
     MPU6050_t MPU6050;
+    HealthMonitor_Init();
     // uint16_t progress = 0;
     /* USER CODE END 2 */
 

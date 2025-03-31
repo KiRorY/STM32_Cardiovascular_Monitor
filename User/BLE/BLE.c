@@ -30,8 +30,6 @@ void BLE_RxEventCallback(UART_HandleTypeDef *huart, uint16_t size)
     Command_Typedef cmd;
     if (Command_Parse((uint8_t*)ble_recv_data, size, &cmd) == TRUE){
         //解析成功
-        uint8_t output[DATALEN];
-        uint16_t data_size;
         LCD_ShowString(20, 20, cmd.data, BLACK, BLACK, 12, 0);
     }
 }
