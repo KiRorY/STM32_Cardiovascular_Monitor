@@ -33,6 +33,7 @@
 #include "LoopProgram.h"
 #include "MPU6050.h"
 #include "HealthMonitor.h"
+#include <stdint.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -109,10 +110,8 @@ int main(void)
     LCD_Init();
     LCD_Fill(0, 0, LCD_W, LCD_H, WHITE);
     // LCD_ShowString(0, 10, "Blood and heart", BLACK, WHITE, 12, 0);
-
+    
     // BLE_Init(); 
-    //    MAX30102_Reset();
-    //    MAX30102_Config();
     LoopProgram_Start();
     LoopProgram_WatchDog_Set(TRUE);
     MPU6050_t MPU6050;

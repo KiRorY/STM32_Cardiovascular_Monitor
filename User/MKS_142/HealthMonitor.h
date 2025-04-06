@@ -30,17 +30,10 @@ typedef struct
     uint16_t CRC16;
 } TST30_PACK_S;
 
-enum Monitor_Command{
-    monitor_on = 0x8A,                      //采集功能开
-    monitor_off = 0x88,                     //采集功能关
-    checkup_on = 0x8E,                      //体检功能开
-    checkup_off = 0x8C,                     //体检功能关
-};
-
 void data_capture_op(BOOL state);
 void rt_parser(uint8_t* data, size_t size, HealthData_RT* health_data);
 
 extern void HealthMonitor_Init(void);
-extern void HealthMonitor_recv_callback(UART_HandleTypeDef *huart, size_t size);
+extern void HealthMonitor_recv_callback(uint8_t* recv_data, size_t size);
 
 #endif /*HEALTHMONITOR_H_*/

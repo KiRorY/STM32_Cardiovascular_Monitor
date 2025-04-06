@@ -77,8 +77,7 @@ void LoopProgram_Start(void)
  * */
 void LoopProgram_Main(void)
 {
-    MPU6050_Read_All(&hi2c1,&MPU6050);
-    LCD_ShowFloatNum1(0, 10, MPU6050.Ax, BLACK, WHITE, 12, 0);
+
 }
 
 /******************回调函数*******************/
