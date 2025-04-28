@@ -21,6 +21,7 @@
 #ifndef __USART_H__
 #define __USART_H__
 
+#include <stdint.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -44,7 +45,8 @@ void MX_USART1_UART_Init(void);
 void MX_USART2_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-
+static uint8_t uart1_recv_onebyte;
+static uint8_t uart2_recv_onebyte;
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

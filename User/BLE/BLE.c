@@ -2,7 +2,6 @@
 #include "Command.h"
 #include "stm32f1xx_hal_uart.h"
 #include "usart.h"
-#include "LCD.h"
 #include <stdint.h>
 #include <string.h>
 
@@ -18,18 +17,16 @@ static char ble_recv_char;
 void BLE_Init()
 {
     memset(ble_recv_data, 0, sizeof(ble_recv_data)); 
-    HAL_UARTEx_ReceiveToIdle_IT(&huart1, (uint8_t*) ble_recv_data, sizeof(ble_recv_data));
+}
+
+void BLE_SendData(uint8_t* data, uint16_t size)
+{
+    HAL_UART_Transmit(&huart2, data, size, DATALEN);
 }
 
 /******************回调函数*******************/
 
-void BLE_RxEventCallback(UART_HandleTypeDef *huart, uint16_t size)
+void BLE_recv_callback(uint8_t*ble_recv_data)
 {
-    // HAL_UARTEx_ReceiveToIdle_IT(&huart1, (uint8_t*)ble_recv_data, size);
-    HAL_UART_Receive_IT((huart), (uint8_t*)ble_recv_char, 1);
-    Command_Typedef cmd;
-    if (Command_Parse((uint8_t*)ble_recv_data, size, &cmd) == TRUE){
-        //解析成功
-        LCD_ShowString(20, 20, cmd.data, BLACK, BLACK, 12, 0);
-    }
+    BLECommandTypedef cmd;
 }

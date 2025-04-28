@@ -10,6 +10,6 @@
 
 
 extern void BLE_Init();
-extern void BLE_RxEventCallback(UART_HandleTypeDef *huart, uint16_t size);
+extern void BLE_recv_callback(uint8_t*ble_recv_data);
 
 #endif /*BLE_H_*/

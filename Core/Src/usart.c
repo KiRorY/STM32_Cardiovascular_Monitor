@@ -21,7 +21,9 @@
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
+#include "BLE.h"
 #include "HealthMonitor.h"
+#include "main.h"
 #include "stm32f1xx_hal_def.h"
 #include "stm32f1xx_hal_uart.h"
 #include <string.h>
@@ -57,7 +59,7 @@ void MX_USART1_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART1_Init 2 */
-    HAL_UART_Receive_IT(&huart1, UART1_RecvBuffer, UART1_RECV_BUFFER_SIZE); //开启接收中断
+    HAL_UART_Receive_IT(&huart1, &uart1_recv_onebyte, 1); //开启接收中断
   /* USER CODE END USART1_Init 2 */
 
 }
@@ -74,7 +76,7 @@ void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 115200;
+  huart2.Init.BaudRate = 57600;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -86,6 +88,7 @@ void MX_USART2_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART2_Init 2 */
+    HAL_UART_Receive_IT(&huart2, UART2_RecvBuffer, UART2_RECV_BUFFER_SIZE); //开启接收中断
   /* USER CODE END USART2_Init 2 */
 
 }
@@ -207,12 +210,13 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
     //huart1:蓝牙通讯
     if (huart == &huart1){ 
-        HealthMonitor_recv_callback(UART1_RecvBuffer, UART1_RECV_BUFFER_SIZE); 
-        memset(UART1_RecvBuffer, 0, UART1_RECV_BUFFER_SIZE); //清空接收缓存
-        HAL_UART_Receive_IT(&huart1, UART1_RecvBuffer, UART1_RECV_BUFFER_SIZE); //开启接收中断
+        HealthMonitor_recv_callback(&uart1_recv_onebyte); 
+        HAL_UART_Receive_IT(&huart1, &uart1_recv_onebyte, 1); //开启接收中断
     }
 
     if (huart == &huart2){
+        BLE_recv_callback(&uart2_recv_onebyte);
+        HAL_UART_Receive_IT(&huart2, &uart1_recv_onebyte, 1); //开启接收中断
     }
 
 }

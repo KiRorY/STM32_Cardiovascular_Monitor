@@ -35,7 +35,7 @@ uint16_t get_CRC16(uint8_t* data, uint16_t data_size)
  * @param[out] output 报文结构体
  * @return 解析成功为TRUE; 报文校验出错返回FALSE,且output不赋值
  * */
-BOOL Command_Parse(uint8_t* data, uint16_t data_size, Command_Typedef* output)
+BOOL command_parse(uint8_t* data, uint16_t data_size, BLECommandTypedef* output)
 {
     int ret = FALSE;
     if (data_size > DATALEN){
@@ -77,7 +77,7 @@ BOOL Command_Parse(uint8_t* data, uint16_t data_size, Command_Typedef* output)
  * @param[out] 输出数据长度
  * @return 解析成功为TRUE; 报文结构出错返回FALSE,且output不赋值
  * */
-BOOL Command_Decipher(Command_Typedef* cmd, uint8_t* output, uint16_t* data_size)
+BOOL command_decipher(BLECommandTypedef* cmd, uint8_t* output, uint16_t* data_size)
 {
     BOOL ret = FALSE;
     uint8_t index = 0;

@@ -73,8 +73,6 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN Private defines */
 
-#define UART1_RECV_BUFFER_SIZE 88 
-static uint8_t UART1_RecvBuffer[UART1_RECV_BUFFER_SIZE]; //接收数据缓存
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
