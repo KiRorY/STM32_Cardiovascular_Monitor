@@ -21,7 +21,6 @@
 #ifndef __USART_H__
 #define __USART_H__
 
-#include <stdint.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

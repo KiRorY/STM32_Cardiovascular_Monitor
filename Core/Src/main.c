@@ -18,8 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "ATK_MPU6050_SoftwareDriver/atk_ms6050.h"
 #include "i2c.h"
-#include "iwdg.h"
 #include "rtc.h"
 #include "tim.h"
 #include "usart.h"
@@ -31,8 +31,8 @@
 #include "LCD.h"
 #include "stm32f1xx_hal.h"
 #include "LoopProgram.h"
-#include "MPU6050.h"
 #include "HealthMonitor.h"
+#include <BLE.h>
 #include <stdint.h>
 /* USER CODE END Includes */
 
@@ -96,7 +96,6 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_IWDG_Init();
   MX_RTC_Init();
   MX_TIM1_Init();
   MX_TIM2_Init();
@@ -105,17 +104,14 @@ int main(void)
   MX_I2C1_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+    BLE_Init();
     // LoopProgram_WatchDog_Set(TRUE);
     LCD_Init();
     LCD_Fill(0, 0, LCD_W, LCD_H, WHITE);
-    // LCD_ShowString(0, 10, "Blood and heart", BLACK, WHITE, 12, 0);
-    
-    // BLE_Init(); 
-    LoopProgram_Start();
-    LoopProgram_WatchDog_Set(TRUE);
-    MPU6050_t MPU6050;
+    my_mpu6050_init();
     HealthMonitor_Init();
+    LoopProgram_Start();
+    // LoopProgram_WatchDog_Set(TRUE);
     // uint16_t progress = 0;
   /* USER CODE END 2 */
 
