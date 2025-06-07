@@ -4,6 +4,8 @@
 #include <stddef.h>
 #include "Constant.h"
 
+#define MPU_HISTORY_SIZE 12
+
 typedef struct 
 {
     uint8_t head;           //数据头
@@ -25,19 +27,37 @@ typedef struct
 } HealthData_RT;
 
 typedef struct
-{
-    uint16_t head;           //体检数据包头
-    uint16_t sequence;       //体检数据包序号
-    uint8_t id[16];          //唯一硬件编号
-    uint8_t tst30_data[168]; //体检数据
-    uint8_t rsv1[6];         //保留数据
-    uint16_t CRC16;
-} TST30_PACK_S;
+{ 
+    float Ax[MPU_HISTORY_SIZE];              //加速度，单位为g,范围在+-2g，因此需要除以16384
+    float Ay[MPU_HISTORY_SIZE];
+    float Az[MPU_HISTORY_SIZE];
+ 
+    float Gx[MPU_HISTORY_SIZE];              //角度陀螺仪，单位为度/S，范围+-2000，除以16.4
+    float Gy[MPU_HISTORY_SIZE];
+    float Gz[MPU_HISTORY_SIZE];
+ 
+    int16_t Temperature[MPU_HISTORY_SIZE];    //除以精确倍数100
+    uint8_t current_index;
+ 
+} MPU6050History_t;
+
+// typedef struct
+// {
+//     uint16_t head;           //体检数据包头
+//     uint16_t sequence;       //体检数据包序号
+//     uint8_t id[16];          //唯一硬件编号
+//     uint8_t tst30_data[168]; //体检数据
+//     uint8_t rsv1[6];         //保留数据
+//     uint16_t CRC16;
+// } TST30_PACK_S;
+
+extern MPU6050History_t MPU6050_Data_history;
 
 void data_capture_op(BOOL state);
 void rt_parser(uint8_t* data, size_t size, HealthData_RT* health_data);
 
 extern void HealthMonitor_Init(void);
+extern void HealthMonitor_MPU6050_AddNewData(MPU6050History_t* mpu6050_data_history);
 extern void HealthMonitor_recv_callback(uint8_t* recv_data);
 
 #endif /*HEALTHMONITOR_H_*/
