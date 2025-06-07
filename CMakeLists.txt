@@ -17,6 +17,7 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 project(stm32c8t6_monitor C CXX ASM)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 11)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 #Uncomment for hardware floating point
 #add_compile_definitions(ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING)
@@ -51,9 +52,8 @@ endif ()
 
 include_directories(Core/Inc Drivers/STM32F1xx_HAL_Driver/Inc Drivers/STM32F1xx_HAL_Driver/Inc/Legacy Drivers/CMSIS/Device/ST/STM32F1xx/Include Drivers/CMSIS/Include
                     User
-                    User/APP
                     User/LCD
-                    User/ATK_MS6050
+                    User/ATK_MPU6050_SoftwareDriver
                     User/MKS_142
                     User/BLE)
 
@@ -74,7 +74,6 @@ add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
 set(HEX_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.hex)
 set(BIN_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.bin)
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 #set(CMAKE_EXE_LINKER_FLAGS "-specs=nosys.specs -specs=nano.specs -g -Wl,--gc-sections -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -mabi=aapcs" CACHE INTERNAL "executable linker flags")
 
 add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
