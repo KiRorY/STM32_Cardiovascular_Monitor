@@ -1,6 +1,6 @@
 # STM32-Based Health Risk Prediction System (Hardware)
 
-> This repository contains the hardware implementation for my 2025 Undergraduate Senior Design Project. The backend implementation can be found in the [HealthMonitor](https://github.com/KiRorY/HealthMonitor) repository.
+> This repository contains the hardware implementation for my 2025 Undergraduate Senior Design Project. The backend implementation can be found in the [Hybrid-NN_Health_Server](https://github.com/KiRorY/Hybrid-NN_Health_Server) repository.
 
 ## Hardware List
 
@@ -36,7 +36,7 @@ Flashed using a cross-compiler toolchain and OpenOCD.
 ---
 
 # 基于STM32的健康风险预测系统(硬件部分)
->本项目代码是2025年本科毕业设计的系统硬件部分。后端部分参考[HealthMoniter](https://github.com/KiRorY/HealthMonitor)这个库。
+>本项目代码是2025年本科毕业设计的系统硬件部分。后端部分参考[Hybrid-NN_Health_Server](https://github.com/KiRorY/Hybrid-NN_Health_Server)这个库。
 
 ## 硬件列表
 
